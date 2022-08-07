@@ -56,3 +56,5 @@ board.display_board
 
 puts "player 1 move?"
 player1.make_move(gets.chomp.to_i)
+
+board.display_board

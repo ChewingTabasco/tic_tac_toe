@@ -2,16 +2,16 @@ class Player
   attr_accessor :name, :char
 
   def initialize
-    @name
-    @char
+    # @name
+    # @char
   end
 
-  def set_attributes(num)
+  def write_attributes(num)
     puts "Player #{num}, what is your name?"
-    self.name = gets.chomp
+    @name = gets.chomp
 
-    puts "#{self.name}, what character would you like to use?"
-    self.char = gets.chomp.strip[0] #first character of input w/o whitespace
+    puts "#{@name}, what character would you like to use?"
+    @char = gets.chomp.strip[0] # first character of input w/o whitespace
   end
 
   def make_move(space)
@@ -45,16 +45,16 @@ default_board_strings = [
   "  #{default_grid_spaces[6]}  |  #{default_grid_spaces[7]}  |  #{default_grid_spaces[8]}  ", 
   "     |     |     "]
 
-player1 = Player.new()
-player1.set_attributes(1)
+player1 = Player.new
+player1.write_attributes(1)
 
-player2 = Player.new()
-player2.set_attributes(2)
+player2 = Player.new
+player2.write_attributes(2)
 
 board = Board.new(default_board_strings, default_grid_spaces)
 board.display_board
 
-puts "player 1 move?"
+puts 'player 1 move?'
 player1.make_move(gets.chomp.to_i)
 
 board.display_board

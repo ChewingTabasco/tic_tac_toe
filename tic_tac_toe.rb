@@ -77,8 +77,8 @@ default_board_strings = [
 player1 = Player.new
 player1.write_attributes(1)
 
-# player2 = Player.new
-# player2.write_attributes(2)
+player2 = Player.new
+player2.write_attributes(2)
 
 board = Board.new(default_grid_spaces)
 board.display_board
@@ -86,5 +86,9 @@ board.display_board
 4.times do
   puts 'player 1 move?'
   player1.make_move(gets.chomp.to_i, board)
+  board.display_board
+
+  puts 'player 2 move?'
+  player2.make_move(gets.chomp.to_i, board)
   board.display_board
 end

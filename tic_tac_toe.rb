@@ -101,12 +101,11 @@ def play_game(player1, player2, board)
     if round_count.odd?
       puts "#{player1.name}, pick an available space to place your '#{player1.char}'"
       player1.make_move(gets.chomp.to_i, board)
-      board.display_board
     else
       puts "#{player2.name}, pick an available space to place your '#{player2.char}'"
       player2.make_move(gets.chomp.to_i, board)
-      board.display_board
     end
+    board.display_board
     round_count += 1
   end
 end

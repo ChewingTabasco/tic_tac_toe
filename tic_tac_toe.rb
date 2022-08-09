@@ -26,7 +26,7 @@ class Player
 end
 
 class Board
-  attr_accessor :board_arr, :spaces_arr
+  attr_accessor :spaces_arr
 
   def initialize(spaces_arr)
     @spaces_arr = spaces_arr
@@ -83,12 +83,32 @@ player2.write_attributes(2)
 board = Board.new(default_grid_spaces)
 board.display_board
 
-4.times do
-  puts 'player 1 move?'
-  player1.make_move(gets.chomp.to_i, board)
-  board.display_board
+# 4.times do
+#   puts 'player 1 move?'
+#   player1.make_move(gets.chomp.to_i, board)
+#   board.display_board
 
-  puts 'player 2 move?'
-  player2.make_move(gets.chomp.to_i, board)
-  board.display_board
+#   puts 'player 2 move?'
+#   player2.make_move(gets.chomp.to_i, board)
+#   board.display_board
+# end
+
+
+def play_game(player1, player2, board)
+  round_count = 1
+
+  while round_count <= 9
+    if round_count.odd?
+      puts "#{player1.name}, pick an available space to place your '#{player1.char}'"
+      player1.make_move(gets.chomp.to_i, board)
+      board.display_board
+    else
+      puts "#{player2.name}, pick an available space to place your '#{player2.char}'"
+      player2.make_move(gets.chomp.to_i, board)
+      board.display_board
+    end
+    round_count += 1
+  end
 end
+
+play_game(player1, player2, board)

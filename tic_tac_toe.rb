@@ -20,8 +20,6 @@ class Player
 
     @board.spaces_arr[space - 1] = @char
     @board.update_board(@board.spaces_arr)
-
-    # puts "grid number #{@space} should be #{@char}"
   end
 end
 
@@ -82,17 +80,6 @@ player2.write_attributes(2)
 
 board = Board.new(default_grid_spaces)
 board.display_board
-
-# 4.times do
-#   puts 'player 1 move?'
-#   player1.make_move(gets.chomp.to_i, board)
-#   board.display_board
-
-#   puts 'player 2 move?'
-#   player2.make_move(gets.chomp.to_i, board)
-#   board.display_board
-# end
-
 
 def play_game(player1, player2, board)
   round_count = 1

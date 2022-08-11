@@ -10,7 +10,7 @@ class Player
     puts "Player #{num}, what is your name?"
     @name = gets.chomp
   end
-  
+
   def write_char
     puts "#{@name}, what character would you like to use?"
     @char = gets.chomp.strip[0] # first character of input w/o whitespace
@@ -45,7 +45,7 @@ end
 
 class Board
   attr_accessor :spaces_arr, :game_end
-  
+
   @game_end = false
 
   def initialize(spaces_arr)
@@ -94,12 +94,10 @@ class Board
       @spaces_arr.values_at(0, 4, 8),
       @spaces_arr.values_at(2, 4, 6)
     ]
-    p winning_combos
     winning_combos.each do |val|
-      p val
-      if val.join("") == "#{p1.char}#{p1.char}#{p1.char}"
+      if val.join('') == "#{p1.char}#{p1.char}#{p1.char}"
         end_game_by_win(p1)
-      elsif val.join("") == "#{p2.char}#{p2.char}#{p2.char}"
+      elsif val.join('') == "#{p2.char}#{p2.char}#{p2.char}"
         end_game_by_win(p2)
       end
     end
@@ -108,6 +106,25 @@ class Board
   def end_game_by_win(player)
     puts "#{player.name} wins!"
     @game_end = true
+  end
+
+  def end_game_by_tie
+    puts 'No remaining moves. Tie game.'
+    @game_end = true
+  end
+
+  def play_again?
+    puts "Play again? (Y/N)"
+    user_input = gets.chomp.upcase
+
+    case user_input
+    when 'Y'
+      true
+    when 'N'
+      false
+    else
+      self.play_again?
+    end
   end
 end
 
@@ -133,7 +150,6 @@ player2.write_name(2)
 player2.write_char
 player2.check_char(player1.char)
 
-
 board = Board.new(default_grid_spaces)
 board.display_board
 
@@ -152,7 +168,18 @@ def play_game(player1, player2, board)
     board.check_for_win([player1, player2])
     round_count += 1
   end
-  puts 'game over'
+
+  if round_count >= 9 && !board.game_end
+    board.end_game_by_tie
+  end
+  
+  if board.play_again?
+    board = Board.new([*(1..9)])
+    board.display_board
+    play_game(player1, player2, board)
+  else
+    puts 'Thanks for playing!'
+  end
 end
 
 play_game(player1, player2, board)

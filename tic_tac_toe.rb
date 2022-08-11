@@ -6,10 +6,12 @@ class Player
     # @char
   end
 
-  def write_attributes(num)
+  def write_name(num)
     puts "Player #{num}, what is your name?"
     @name = gets.chomp
-
+  end
+  
+  def write_char
     puts "#{@name}, what character would you like to use?"
     @char = gets.chomp.strip[0] # first character of input w/o whitespace
   end
@@ -18,14 +20,26 @@ class Player
     @space = space
     @board = board
 
-    @board.spaces_arr[space - 1] = @char
+    check_move(@board.spaces_arr)
+
+    @board.spaces_arr[@space - 1] = @char
     @board.update_board(@board.spaces_arr)
   end
 
   def check_char(p1_char)
     while @char == p1_char
       puts 'This character is already in use. Please pick a different one.'
-      self.write_attributes(2)
+      self.write_char
+    end
+  end
+
+  def check_move(spaces)
+    @spaces = spaces
+
+    while @board.spaces_arr[@space - 1].instance_of?(String)
+      p @board.spaces_arr[@space - 1]
+      puts 'Invalid placement: Please enter a value between 1 and 9 and ensure that the space is free.'
+      @space = gets.chomp.to_i
     end
   end
 end
@@ -80,10 +94,12 @@ default_board_strings = [
   "     |     |     "]
 
 player1 = Player.new
-player1.write_attributes(1)
+player1.write_name(1)
+player1.write_char
 
 player2 = Player.new
-player2.write_attributes(2)
+player2.write_name(2)
+player2.write_char
 player2.check_char(player1.char)
 
 

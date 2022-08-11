@@ -77,6 +77,35 @@ class Board
   "  #{spaces_arr[6]}  |  #{spaces_arr[7]}  |  #{spaces_arr[8]}  ",
   "     |     |     "]
   end
+
+  def check_for_win(players)
+    p1 = players[0]
+    p2 = players[1]
+
+    winning_combos = [
+      @spaces_arr.values_at(0, 1, 2),
+      @spaces_arr.values_at(3, 4, 5),
+      @spaces_arr.values_at(6, 7, 8),
+      @spaces_arr.values_at(0, 3, 6),
+      @spaces_arr.values_at(1, 4, 7),
+      @spaces_arr.values_at(2, 5, 8),
+      @spaces_arr.values_at(0, 4, 8),
+      @spaces_arr.values_at(2, 4, 6)
+    ]
+    p winning_combos
+    winning_combos.each do |val|
+      p val
+      if val.join("") == "#{p1.char}#{p1.char}#{p1.char}"
+        end_game_by_win(p1)
+      elsif val.join("") == "#{p2.char}#{p2.char}#{p2.char}"
+        end_game_by_win(p2)
+      end
+    end
+  end
+
+  def end_game_by_win(player)
+    puts "#{player.name} wins!"
+  end
 end
 
 default_grid_spaces = [1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -117,6 +146,7 @@ def play_game(player1, player2, board)
       player2.make_move(gets.chomp.to_i, board)
     end
     board.display_board
+    board.check_for_win([player1, player2])
     round_count += 1
   end
 end

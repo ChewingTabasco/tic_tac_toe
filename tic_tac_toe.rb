@@ -36,8 +36,7 @@ class Player
   def check_move(spaces)
     @spaces = spaces
 
-    while @board.spaces_arr[@space - 1].instance_of?(String)
-      p @board.spaces_arr[@space - 1]
+    while !@space.between?(1, 9) || @board.spaces_arr[@space - 1].instance_of?(String)
       puts 'Invalid placement: Please enter a value between 1 and 9 and ensure that the space is free.'
       @space = gets.chomp.to_i
     end

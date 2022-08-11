@@ -21,6 +21,13 @@ class Player
     @board.spaces_arr[space - 1] = @char
     @board.update_board(@board.spaces_arr)
   end
+
+  def check_char(p1_char)
+    while @char == p1_char
+      puts "This character is already in use. Please pick a different one."
+      self.write_attributes(2)
+    end
+  end
 end
 
 class Board
@@ -77,6 +84,8 @@ player1.write_attributes(1)
 
 player2 = Player.new
 player2.write_attributes(2)
+player2.check_char(player1.char)
+
 
 board = Board.new(default_grid_spaces)
 board.display_board

@@ -1,9 +1,12 @@
 class Player
   attr_accessor :name, :char
 
+  @@player_count = 1
+
   def initialize
-    # @name
-    # @char
+    write_name(@@player_count)
+    write_char
+    @@player_count += 1
   end
 
   def write_name(num)
@@ -142,12 +145,7 @@ default_board_strings = [
   "     |     |     "]
 
 player1 = Player.new
-player1.write_name(1)
-player1.write_char
-
 player2 = Player.new
-player2.write_name(2)
-player2.write_char
 player2.check_char(player1.char)
 
 board = Board.new(default_grid_spaces)
@@ -172,7 +170,7 @@ def play_game(player1, player2, board)
   if round_count >= 9 && !board.game_end
     board.end_game_by_tie
   end
-  
+
   if board.play_again?
     board = Board.new([*(1..9)])
     board.display_board

@@ -24,7 +24,7 @@ class Player
 
   def check_char(p1_char)
     while @char == p1_char
-      puts "This character is already in use. Please pick a different one."
+      puts 'This character is already in use. Please pick a different one.'
       self.write_attributes(2)
     end
   end

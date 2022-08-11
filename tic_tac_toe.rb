@@ -44,7 +44,9 @@ class Player
 end
 
 class Board
-  attr_accessor :spaces_arr
+  attr_accessor :spaces_arr, :game_end
+  
+  @game_end = false
 
   def initialize(spaces_arr)
     @spaces_arr = spaces_arr
@@ -105,6 +107,7 @@ class Board
 
   def end_game_by_win(player)
     puts "#{player.name} wins!"
+    @game_end = true
   end
 end
 
@@ -137,7 +140,7 @@ board.display_board
 def play_game(player1, player2, board)
   round_count = 1
 
-  while round_count <= 9
+  while !board.game_end && round_count <= 9
     if round_count.odd?
       puts "#{player1.name}, pick an available space to place your '#{player1.char}'"
       player1.make_move(gets.chomp.to_i, board)
@@ -149,6 +152,7 @@ def play_game(player1, player2, board)
     board.check_for_win([player1, player2])
     round_count += 1
   end
+  puts 'game over'
 end
 
 play_game(player1, player2, board)

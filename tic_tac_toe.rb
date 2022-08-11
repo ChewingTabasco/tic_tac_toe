@@ -133,17 +133,6 @@ end
 
 default_grid_spaces = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-default_board_strings = [
-  "     |     |     ",
-  "  #{default_grid_spaces[0]}  |  #{default_grid_spaces[1]}  |  #{default_grid_spaces[2]}  ",
-  "_____|_____|_____",
-  "     |     |     ",
-  "  #{default_grid_spaces[3]}  |  #{default_grid_spaces[4]}  |  #{default_grid_spaces[5]}  ",
-  "_____|_____|_____",
-  "     |     |     ",
-  "  #{default_grid_spaces[6]}  |  #{default_grid_spaces[7]}  |  #{default_grid_spaces[8]}  ",
-  "     |     |     "]
-
 player1 = Player.new
 player2 = Player.new
 player2.check_char(player1.char)
